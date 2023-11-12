@@ -1,12 +1,12 @@
 const router = require("express").Router();
 const {
-  insertContractType,
-  getAllContractType,
-  deleteContractTypes,
-  updateContractData,
+  insertProductType,
+  getAllProductType,
+  deleteProductTypes,
+  updateProductData,
 } = require("../controllers/contract.controller");
-router.get("/contractType", getAllContractType);
-router.post('/insertcontractType',insertContractType)
-router.delete("/deleteContractTypes/:id", deleteContractTypes);
-router.put("/updateContractData/:id", updateContractData);
+router.get("/ProductType", getAllProductType);
+router.post('/insertProductType',insertProductType)
+router.delete("/deleteProductTypes/:id", deleteProductTypes);
+router.put("/updateProductData/:id", updateProductData);
 module.exports = router;

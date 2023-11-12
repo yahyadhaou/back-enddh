@@ -1,27 +1,27 @@
 var db = require("../database-mysql");
 
-// get one contract
-let getOneContract = (req, res) => {
+// get one Product
+let getOneProduct = (req, res) => {
   const id = req.params.id;
-  const sql = `SELECT * from contract_types where id=?`;
+  const sql = `SELECT * from produit where id=?`;
   db.query(sql, [id], (err, result) => {
     if (err) res.send(err);
     else res.send(result);
   });
 };
-// getAllContractType
+// getAllProductType
 
-const getAllContractType = (req, res) => {
-  let query = `SELECT * FROM contract_types`;
-  db.query(query, (err, contracts) => {
+const getAllProductType = (req, res) => {
+  let query = `SELECT * FROM produit`;
+  db.query(query, (err, Products) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      res.json(contracts);
+      res.json(Products);
     }
   });
 };
-const insertContractType = (req, res) => {
+const insertProductType = (req, res) => {
   let {
     signed_time,
     time_answering,
@@ -43,7 +43,7 @@ const insertContractType = (req, res) => {
     categories,
     inside_categories
   } = req.body;
-  const sql = `INSERT INTO contract_types (
+  const sql = `INSERT INTO produit (
     signed_time, 
     time_answering, 
     title_FR, title_AR, title_EN, 
@@ -83,17 +83,17 @@ const insertContractType = (req, res) => {
    );
 };
 
-//delete contract_types
-let deleteContractTypes = (req, res) => {
+//delete produit
+let deleteProductTypes = (req, res) => {
   const id = req.params.id;
-  const sql = `DELETE FROM contract_types WHERE id =?`;
+  const sql = `DELETE FROM produit WHERE id =?`;
   db.query(sql, [id], (err, result) => {
     if (err) res.send(err);
     else res.send(result);
   });
 };
-const updateContractData = (req, res) => {
-  const id = req.params.id; // Retrieve the contract ID from the route parameters
+const updateProductData = (req, res) => {
+  const id = req.params.id; // Retrieve the Product ID from the route parameters
   const {
     description_FR,
     description_EN,
@@ -105,7 +105,7 @@ const updateContractData = (req, res) => {
     title_EN,
     title_AR,
     image_url,
-  } = req.body;// Destructure the request body to get the updated contract data
+  } = req.body;// Destructure the request body to get the updated Product data
 
   let updates = [];
   // Check which fields are provided in the request body and add them to the updates array
@@ -145,7 +145,7 @@ const updateContractData = (req, res) => {
     return;
   }
 
-  let sql = "UPDATE contract_types SET ";
+  let sql = "UPDATE produit SET ";
   let params = [];
 // Construct the SQL query and params array based on the updates array
   updates.forEach((update, index) => {
@@ -157,15 +157,15 @@ const updateContractData = (req, res) => {
   });
 
   sql += ` WHERE id=${id}`;
- // Execute the database query to update the contract data
+ // Execute the database query to update the Product data
   db.query(sql, params, (err, result) => {
     if (err) res.send(err);
     else res.send(result);
   });
 };
 module.exports = {
-  insertContractType,
-  getAllContractType,
-  deleteContractTypes,
-  updateContractData,
+  insertProductType,
+  getAllProductType,
+  deleteProductTypes,
+  updateProductData,
 };
