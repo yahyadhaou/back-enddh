@@ -41,5 +41,5 @@ app.use(users);
 
 
 app.get("/", (req, res) => {
-  res.send("Welcome To E-Tafakna Admin Backend server");
+  res.send("Welcome To DHcomp Admin Backend server");
 });
